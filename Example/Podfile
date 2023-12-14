@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'erxesSDK_Example' do
+  pod 'erxesSDK', :path => '../'
+
+  target 'erxesSDK_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
