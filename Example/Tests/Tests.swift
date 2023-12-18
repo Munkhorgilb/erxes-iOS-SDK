@@ -1,5 +1,4 @@
 import XCTest
-import erxesSDK
 
 class Tests: XCTestCase {
     

@@ -1,0 +1,44 @@
+{
+  "name": "erxesSDK",
+  "version": "0.1.0",
+  "summary": "A short description of erxesSDK.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Munkh-orgil/erxesSDK",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Munkh-orgil": "monkhorgilbayarbaatar@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Munkh-orgil/erxesSDK.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "13.0"
+  },
+  "source_files": "erxesSDK/Classes/**/*",
+  "resource_bundles": {
+    "erxesSDK": [
+      "erxesSDK/Assets/**/*.{jpg,storyboard,png,ttf,gif,strings,lproj,json}"
+    ]
+  },
+  "dependencies": {
+    "Apollo": [
+
+    ],
+    "Apollo/WebSocket": [
+
+    ],
+    "Apollo/SQLite": [
+
+    ],
+    "SnapKit": [
+
+    ],
+    "ErxesFont": [
+      "~> 1.0.1"
+    ]
+  }
+}

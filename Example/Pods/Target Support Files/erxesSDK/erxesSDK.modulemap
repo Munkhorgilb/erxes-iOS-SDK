@@ -1,0 +1,6 @@
+framework module erxesSDK {
+  umbrella header "erxesSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,49 @@
+PODS:
+  - Apollo (0.39.0):
+    - Apollo/Core (= 0.39.0)
+  - Apollo/Core (0.39.0)
+  - Apollo/SQLite (0.39.0):
+    - Apollo/Core
+    - SQLite.swift (~> 0.12.2)
+  - Apollo/WebSocket (0.39.0):
+    - Apollo/Core
+    - Starscream (~> 3.1.1)
+  - ErxesFont (1.0.1)
+  - erxesSDK (0.1.0):
+    - Apollo
+    - Apollo/SQLite
+    - Apollo/WebSocket
+    - ErxesFont (~> 1.0.1)
+    - SnapKit
+  - SnapKit (5.6.0)
+  - SQLite.swift (0.12.2):
+    - SQLite.swift/standard (= 0.12.2)
+  - SQLite.swift/standard (0.12.2)
+  - Starscream (3.1.1)
+
+DEPENDENCIES:
+  - erxesSDK (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Apollo
+    - ErxesFont
+    - SnapKit
+    - SQLite.swift
+    - Starscream
+
+EXTERNAL SOURCES:
+  erxesSDK:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Apollo: f6c6410ebee82dd5846be87b81cedc8bc7754a82
+  ErxesFont: 273febbd20994324f57d848c9315ee704f818fe6
+  erxesSDK: 73f35f0a4397a0d28221c9dd090bc7bf673e5999
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+
+PODFILE CHECKSUM: 4d324f1ffc913937d1f8c4f94aa4dea5c0153395
+
+COCOAPODS: 1.14.3
