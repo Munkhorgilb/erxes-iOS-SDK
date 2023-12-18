@@ -14,7 +14,11 @@ PODS:
     - Apollo/SQLite
     - Apollo/WebSocket
     - ErxesFont (~> 1.0.1)
+    - SDWebImage
     - SnapKit
+  - SDWebImage (5.18.5):
+    - SDWebImage/Core (= 5.18.5)
+  - SDWebImage/Core (5.18.5)
   - SnapKit (5.6.0)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
@@ -28,6 +32,7 @@ SPEC REPOS:
   trunk:
     - Apollo
     - ErxesFont
+    - SDWebImage
     - SnapKit
     - SQLite.swift
     - Starscream
@@ -39,7 +44,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Apollo: f6c6410ebee82dd5846be87b81cedc8bc7754a82
   ErxesFont: 273febbd20994324f57d848c9315ee704f818fe6
-  erxesSDK: 73f35f0a4397a0d28221c9dd090bc7bf673e5999
+  erxesSDK: f12cb10d845ceebbec081234142faa25a57391e3
+  SDWebImage: 7ac2b7ddc5e8484c79aa90fc4e30b149d6a2c88f
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
