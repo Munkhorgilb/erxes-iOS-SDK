@@ -2,9 +2,6 @@
 //  SaasAPI.swift
 //  erxesiosdk
 //
-//  Created by Soyombo bat-erdene on 9/5/19.
-//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
-//
 
 import Apollo
 public final class ConversationMessageInsertedSaasSubscription: GraphQLSubscription {

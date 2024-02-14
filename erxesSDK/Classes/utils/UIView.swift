@@ -2,9 +2,6 @@
 //  UIView.swift
 //  erxesiosdk
 //
-//  Created by Soyombo bat-erdene on 8/16/19.
-//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
-//
 
 import Foundation
 import UIKit

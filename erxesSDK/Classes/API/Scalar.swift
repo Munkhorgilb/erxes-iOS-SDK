@@ -2,9 +2,6 @@
 //  Scalar.swift
 //  Erxes iOS SDK
 //
-//  Created by Soyombo bat-erdene on 4/23/20.
-//  Copyright © 2020 Soyombo bat-erdene. All rights reserved.
-//
 
 import Apollo
 
@@ -61,6 +58,7 @@ struct MessengerData: Decodable {
     let knowledgeBaseTopicId: String?
     let websiteApps: [WebsiteApp?]?
     let formCode: String?
+    let showVideoCallRequest: Bool?
 }
 
 struct BodData: Decodable {
@@ -107,7 +105,6 @@ struct UIOptions: Decodable {
     let color: String?
     let wallpaper: String?
     let logo: String?
-    let videoCallUsageStatus: Bool?
 }
 
 

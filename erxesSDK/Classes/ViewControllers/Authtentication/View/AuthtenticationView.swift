@@ -19,7 +19,7 @@ class AuthtenticationView: AbstractViewController {
         textfield.leftView = leftPadding
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         button.setImage(UIImage.erxes(with: .chevron, textColor: .white), for: .normal)
-        button.addTarget(AuthtenticationView.self, action: #selector(loginAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         button.backgroundColor = UIColor(hexString: uiOptions?.color ?? defaultColorCode)
         let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         rightView.addSubview(button)
@@ -68,8 +68,8 @@ class AuthtenticationView: AbstractViewController {
         segmentedControl.setButtonTitles(buttonTitles: ["Email".localized(lang), "SMS".localized(lang)])
         self.containerView.addSubview(textField)
         textField.delegate = self
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         self.setupViewModel()
     }
     
@@ -92,9 +92,9 @@ class AuthtenticationView: AbstractViewController {
 
         }
 
-//        self.viewModel.serverErrorStatus = { error in
-//
-//        }
+        self.viewModel.serverErrorStatus = { error in
+
+        }
 
         self.viewModel.didAuthenticate = { data in
             UserDefaults().set(true, forKey: "authenticated")
@@ -120,40 +120,40 @@ class AuthtenticationView: AbstractViewController {
         }
     }
     
-//    @objc func keyboardHandler(notification: NSNotification) {
-//        let info = notification.userInfo!
-//        
-//        var keyboardFrame: CGRect
-//        if let keyBoardInfo = info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-//            keyboardFrame = keyBoardInfo.cgRectValue
-//        } else {
-//            return
-//        }
-//        
-//        
-//        if notification.name == UIResponder.keyboardWillShowNotification {
-//            UIView.animate(withDuration: 0.3) {
-//                
-//                self.containerView.snp.remakeConstraints({ (make) in
-//                    make.left.right.equalToSuperview()
-//                    make.height.equalTo(240)
-//                    make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-keyboardFrame.size.height)
-//                })
-//                self.containerView.layoutSubviews()
-//                
-//            }
-//            
-//        }
-//        if notification.name == UIResponder.keyboardWillHideNotification {
-//            
-//        }
-//        
-//        if notification.name == UIResponder.keyboardDidShowNotification {
-//            
-//        }
-//        
-//        self.header.layoutSubviews()
-//    }
+    @objc func keyboardHandler(notification: NSNotification) {
+        let info = notification.userInfo!
+        
+        var keyboardFrame: CGRect
+        if let keyBoardInfo = info[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            keyboardFrame = keyBoardInfo.cgRectValue
+        } else {
+            return
+        }
+        
+        
+        if notification.name == NSNotification.Name.UIKeyboardWillShow {
+            UIView.animate(withDuration: 0.3) {
+                
+                self.containerView.snp.remakeConstraints({ (make) in
+                    make.left.right.equalToSuperview()
+                    make.height.equalTo(240)
+                    make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-keyboardFrame.size.height + 40)
+                })
+                self.containerView.layoutSubviews()
+                
+            }
+            
+        }
+        if notification.name == NSNotification.Name.UIKeyboardWillHide {
+            
+        }
+        
+        if notification.name == NSNotification.Name.UIKeyboardWillHide {
+            
+        }
+        
+        self.header.layoutSubviews()
+    }
     
     @objc func loginAction() {
         if segmentedControl.selectedIndex == 0 {
@@ -171,7 +171,6 @@ class AuthtenticationView: AbstractViewController {
                 self.textField.layer.borderColor = UIColor.red.cgColor
             }
         }
-        
     }
     
 }
@@ -200,11 +199,9 @@ extension AuthtenticationView: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        
         let start = textField.position(from: textField.beginningOfDocument, offset: range.location)
         
         let cursorOffset = textField.offset(from: textField.beginningOfDocument, to: start!) + string.count
-        
         
         textField.text = (textField.text as NSString?)!.replacingCharacters(in: range, with: string)
         

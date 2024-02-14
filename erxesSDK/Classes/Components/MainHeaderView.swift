@@ -5,27 +5,29 @@
 
 import UIKit
 import ErxesFont
+import SDWebImage
 
 class MainHeaderView: UIView {
 
     private var supporters = [UserModel]() {
         didSet {
             for supporter in supporters {
-                let avatarView = AvatarView(frame: .zero)
+//                if(supporter.isActive)!{
+                    let avatarView = AvatarView(frame: .zero)
 
-                avatarView.image = UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil)
-                avatarView.image = UIImage(systemName: "person")
+                    avatarView.image = UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil)
+                    avatarView.image = UIImage(systemName: "person")
 
-//                if let avatarUrl = supporter.details?.avatar {
-//                   
-//                avatarView.sd_setImage(with: URL(string: avatarUrl.readFile()), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+                    if let avatarUrl = supporter.details?.avatar {
+                       
+                    avatarView.sd_setImage(with: URL(string: avatarUrl.readFile()), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+                    }
+                    supportersView.addArrangedSubview(avatarView)
+
+                    avatarView.snp.makeConstraints { (make) in
+                        make.width.height.equalTo(50)
+                    }
 //                }
-                supportersView.addArrangedSubview(avatarView)
-
-                avatarView.snp.makeConstraints { (make) in
-                    make.width.height.equalTo(50)
-                }
-
             }
 
             let spacerView = UIView()
@@ -98,7 +100,7 @@ class MainHeaderView: UIView {
         let button = UIButton()
         button.tag = 1
         button.setImage(UIImage.erxes(with: .facebookSquared, textColor: .white, size: CGSize(width: 30, height: 30), backgroundColor: .clear), for: .normal)
-        button.addTarget(MainHeaderView.self, action: #selector(socialAction(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(socialAction(sender:)), for: .touchUpInside)
         return button
     }()
 
@@ -106,7 +108,7 @@ class MainHeaderView: UIView {
         let button = UIButton()
         button.tag = 2
         button.setImage(UIImage.erxes(with: .twitterSquared, textColor: .white, size: CGSize(width: 30, height: 30), backgroundColor: .clear), for: .normal)
-        button.addTarget(MainHeaderView.self, action: #selector(socialAction(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(socialAction(sender:)), for: .touchUpInside)
         return button
     }()
 
@@ -116,7 +118,7 @@ class MainHeaderView: UIView {
         button.setImage(UIImage.erxes(with: .youtubePlay, textColor: .white, size: CGSize(width: 30, height: 30), backgroundColor: .clear), for: .normal)
         button.setImage(UIImage(named: "ic_youtube",in: Erxes.erxesBundle(), compatibleWith: nil), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        button.addTarget(MainHeaderView.self, action: #selector(socialAction(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(socialAction(sender:)), for: .touchUpInside)
         return button
     }()
 
@@ -136,7 +138,7 @@ class MainHeaderView: UIView {
         let button = UIButton()
         button.setImage(UIImage(named: "ic_more",in: Erxes.erxesBundle(), compatibleWith: nil), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        button.addTarget(MainHeaderView.self, action: #selector(moreAction(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(moreAction(sender:)), for: .touchUpInside)
         return button
     }()
 
@@ -232,7 +234,7 @@ class MainHeaderView: UIView {
 
         rightButton.snp.makeConstraints { (make) in
             make.height.width.equalTo(30)
-            make.top.equalToSuperview().offset(5)
+            make.top.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-8)
         }
 
@@ -240,12 +242,13 @@ class MainHeaderView: UIView {
         dateLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(16)
             make.centerY.equalTo(facebookButton.snp.centerY)
+            make.top.equalToSuperview().offset(20)
         }
         
         linksView.snp.makeConstraints { (make) in
             make.left.equalTo(dateLabel.snp.right).offset(8)
             make.right.equalTo(rightButton.snp.left).offset(-16)
-            make.top.equalToSuperview().offset(5)
+            make.top.equalToSuperview().offset(20)
             make.height.equalTo(30)
         }
 

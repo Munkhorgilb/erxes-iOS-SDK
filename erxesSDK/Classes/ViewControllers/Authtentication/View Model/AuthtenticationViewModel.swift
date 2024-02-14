@@ -2,9 +2,6 @@
 //  AuthtenticationViewModel.swift
 //  Erxes iOS SDK
 //
-//  Created by soyombo bat-erdene on 4/30/20.
-//  Copyright © 2020 Soyombo bat-erdene. All rights reserved.
-//
 
 import Foundation
 
@@ -71,7 +68,6 @@ class AuthtenticationViewModel {
     //MARK: -- Example Func
     func authenticate(type:String,value:String){
         self.service.authenticate(type: type, value: value, success: { (data) in
-    
             self.didAuthenticate!(data)
         }) { (error) in
             self.serverErrorStatus!(error)

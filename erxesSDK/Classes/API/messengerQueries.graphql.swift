@@ -16,7 +16,6 @@ public final class WidgetsMessengerSupportersQuery: GraphQLQuery {
           ...UserModel
         }
         isOnline
-        serverTime
       }
     }
     """
@@ -75,7 +74,6 @@ public final class WidgetsMessengerSupportersQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("supporters", type: .list(.object(Supporter.selections))),
           GraphQLField("isOnline", type: .scalar(Bool.self)),
-          GraphQLField("serverTime", type: .scalar(String.self)),
         ]
       }
 
@@ -85,8 +83,8 @@ public final class WidgetsMessengerSupportersQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(supporters: [Supporter?]? = nil, isOnline: Bool? = nil, serverTime: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "MessengerSupportersResponse", "supporters": supporters.flatMap { (value: [Supporter?]) -> [ResultMap?] in value.map { (value: Supporter?) -> ResultMap? in value.flatMap { (value: Supporter) -> ResultMap in value.resultMap } } }, "isOnline": isOnline, "serverTime": serverTime])
+      public init(supporters: [Supporter?]? = nil, isOnline: Bool? = nil) {
+        self.init(unsafeResultMap: ["__typename": "MessengerSupportersResponse", "supporters": supporters.flatMap { (value: [Supporter?]) -> [ResultMap?] in value.map { (value: Supporter?) -> ResultMap? in value.flatMap { (value: Supporter) -> ResultMap in value.resultMap } } }, "isOnline": isOnline])
       }
 
       public var __typename: String {
@@ -113,15 +111,6 @@ public final class WidgetsMessengerSupportersQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "isOnline")
-        }
-      }
-
-      public var serverTime: String? {
-        get {
-          return resultMap["serverTime"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "serverTime")
         }
       }
 

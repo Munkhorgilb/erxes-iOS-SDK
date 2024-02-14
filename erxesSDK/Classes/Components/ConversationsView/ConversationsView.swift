@@ -2,9 +2,6 @@
 //  ConversationsView.swift
 //  Erxes iOS SDK
 //
-//  Created by soyombo bat-erdene on 5/1/20.
-//  Copyright © 2020 Soyombo bat-erdene. All rights reserved.
-//
 
 import UIKit
 
@@ -77,7 +74,7 @@ class ConversationsView: UIView {
         tableView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
-            make.height.equalTo((conversations.count + 1) * 70)
+            make.height.equalTo((conversations.count + 1) * 90)
             make.bottom.equalToSuperview()
         }
 

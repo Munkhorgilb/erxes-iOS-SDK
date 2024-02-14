@@ -2,9 +2,6 @@
 //  ErxesClient.swift
 //  erxesiosdk
 //
-//  Created by Soyombo bat-erdene on 8/15/19.
-//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
-//
 
 import Foundation
 import Apollo
@@ -19,11 +16,13 @@ class ErxesClient {
         self.apiUrl = apiUrlString + "/graphql"
         
         if apiUrlString.contains("http") {
-            socketUrl = apiUrlString.replacingOccurrences(of: "http", with: "ws") + "/subscriptions"
+            socketUrl = apiUrlString.replacingOccurrences(of: "http", with: "ws") + "/graphql"
         } else if apiUrlString.contains("https") {
-            socketUrl = apiUrlString.replacingOccurrences(of: "https", with: "wss") + "/subscriptions"
+            socketUrl = apiUrlString.replacingOccurrences(of: "https", with: "wss") + "/graphql"
         }
     }
+    
+    
     
     private lazy var webSocketTransport: WebSocketTransport = {
         let url = URL(string: self.socketUrl)!

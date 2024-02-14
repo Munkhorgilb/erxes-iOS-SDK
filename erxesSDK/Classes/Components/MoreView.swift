@@ -2,9 +2,6 @@
 //  MoreView.swift
 //  erxesiosdk
 //
-//  Created by Soyombo bat-erdene on 8/31/19.
-//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
-//
 
 import UIKit
 protocol MoreViewDelegate: class  {
@@ -13,6 +10,7 @@ protocol MoreViewDelegate: class  {
 }
 class MoreView: UIViewController {
     weak var delegate: MoreViewDelegate?
+    
     var endButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 13)

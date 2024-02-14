@@ -2,9 +2,6 @@
 //  AbstractViewController.swift
 //  ErxesSDK
 //
-//  Created by Soyombo bat-erdene on 2/19/20.
-//  Copyright © 2020 Soyombo bat-erdene. All rights reserved.
-//
 
 import UIKit
 import SnapKit

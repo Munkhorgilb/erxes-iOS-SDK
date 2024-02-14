@@ -2,16 +2,11 @@
 //  SegmentedCell.swift
 //  erxesiosdk
 //
-//  Created by Soyombo bat-erdene on 8/16/19.
-//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
-//
 
 import UIKit
 
 class ConversationCell: UITableViewCell {
 
- 
-    
     lazy var avatarView: UIImageView = {
         let imageview = UIImageView()
         imageview.image = UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil)
@@ -112,12 +107,11 @@ class ConversationCell: UITableViewCell {
         if let users = viewModel.participatedUsers?.compactMap({$0?.fragments.userDetailModel}) {
             if let user = users.last {
                 nameLabel.text = user.details?.fullName
-//                if let avatar = user.details?.avatar {
-//                    avatarView.sd_setImage(with: URL(string: avatar.readFile()), placeholderImage:UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
-//                }
+                if let avatar = user.details?.avatar {
+                    avatarView.sd_setImage(with: URL(string: avatar.readFile()), placeholderImage:UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+                }
             }
         }
-        
         messageLabel.text = viewModel.content?.withoutHtml
     
         setNeedsLayout()

@@ -10,10 +10,10 @@ class HomeViewModel {
 
     private let service: HomeServiceProtocol
     private var subscription: Cancellable?
-//    var allKBArticles = [KbArticleModel]()
+    var allKBArticles = [KbArticleModel]()
     var unreadIds = [String]() {
         didSet {
-            didSetUnreadCount!(unreadIds)
+//            didSetUnreadCount!(unreadIds)
         }
     }
     private var supporters: [UserModel] = [UserModel]() {
@@ -67,7 +67,7 @@ class HomeViewModel {
     var didReceiveAdminMessage: ((_ model: ConversationAdminMessageInsertedModel) -> ())?
     var didReceiveMessage: ((_ model: MessageModel) -> ())?
     var didSetUnreadCount: ((_ model:[String]) -> ())?
-//    var didReceiveKnowledgeBase:((_ model:KnowledgeBaseTopicModel) -> ())?
+    var didReceiveKnowledgeBase:((_ model:KnowledgeBaseTopicModel) -> ())?
 
     init(withHome serviceProtocol: HomeServiceProtocol = HomeService()) {
         self.service = serviceProtocol
@@ -83,16 +83,14 @@ class HomeViewModel {
     }
 
     func getSupporters() {
-
         self.service.widgetsMessengerSupporters(success: { (users) in
-            self.didGetSupporters!(users)
+            self.didGetSupporters!(users)  
         }) { (error) in
             self.serverErrorStatus!(error)
         }
     }
 
     func getConversations() {
-
         self.service.widgetsConversations(success: { (conversations) in
             self.didGetConversations!(conversations)
             for conversation in conversations {
@@ -154,22 +152,22 @@ class HomeViewModel {
         }
     }
     
-//    func getKnowLedgeBase(id:String){
-//        self.service.knowledgeBaseTopic(topicId: id, success: { (data) in
-//            self.allKBArticles.removeAll()
-//            for category in data.categories! {
-//                for article in (category?.fragments.knowledgeBaseCategoryModel.articles)! {
-//                    if let model = article?.fragments.kbArticleModel {
-//                        self.allKBArticles.append(model)
-//                    }
-//                    
-//                }
-//            }
-//            self.didReceiveKnowledgeBase!(data)
-//        }) { (error) in
-//            self.serverErrorStatus!(error)
-//        }
-//    }
+    func getKnowLedgeBase(id:String){
+        self.service.knowledgeBaseTopic(topicId: id, success: { (data) in
+            self.allKBArticles.removeAll()
+            for category in data.categories! {
+                for article in (category?.fragments.knowledgeBaseCategoryModel.articles)! {
+                    if let model = article?.fragments.kbArticleModel {
+                        self.allKBArticles.append(model)
+                    }
+                    
+                }
+            }
+            self.didReceiveKnowledgeBase!(data)
+        }) { (error) in
+            self.serverErrorStatus!(error)
+        }
+    }
     
     func cancelSubscription(){
         

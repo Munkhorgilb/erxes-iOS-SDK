@@ -2,9 +2,6 @@
 //  SegmentedControl.swift
 //  erxesiosdk
 //
-//  Created by Soyombo bat-erdene on 8/16/19.
-//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
-//
 
 import UIKit
 
@@ -77,12 +74,9 @@ class SegmentedControl: UIView {
 //Configuration View
 extension SegmentedControl {
     private func updateView() {
-
         createButton()
         configSelectorView()
         configStackView()
-
-
     }
 
     private func configStackView() {

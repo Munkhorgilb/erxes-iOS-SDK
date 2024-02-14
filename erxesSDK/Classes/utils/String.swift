@@ -40,7 +40,7 @@ extension String {
     
     func readFile() -> String{
         
-        if (isValidURL(urlString: self) || self.contains("/")) {
+        if (isValidURL(urlString: self) || self.contains("https://")) {
             return self;
         }
         
@@ -52,6 +52,15 @@ extension String {
         let size = self.size(withAttributes: fontAttributes)
         return size.width
     }
+    
+    var htmlWithMaxWidth: String {
+        let screenWidth = UIScreen.main.bounds.width // Assuming iOS development with UIKit
+
+        // Find all <img> tags and set max-width to 100% of screen width
+        let updatedHTML = self.replacingOccurrences(of: "<img", with: "<img style=\"max-width: \(screenWidth)px;\"")
+
+        return updatedHTML
+    }
 
     var html2Attributed: NSMutableAttributedString? {
         do {
@@ -62,7 +71,7 @@ extension String {
                                                                .characterEncoding: String.Encoding.utf8.rawValue],
                                                  documentAttributes: nil)
         } catch {
-            print("error: ", error)
+            print("error: ", error, "html2Attributed")
             return nil
         }
     }
@@ -81,7 +90,7 @@ extension String {
                                                                 .characterEncoding: String.Encoding.utf8.rawValue],
                                                   documentAttributes: &dict), dict)
         } catch {
-            print("error: ", error)
+            print("error: ", error, "htmlAttributed")
             return (nil, nil)
         }
     }

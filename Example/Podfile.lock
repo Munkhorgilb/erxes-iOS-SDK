@@ -14,8 +14,10 @@ PODS:
     - Apollo/SQLite
     - Apollo/WebSocket
     - ErxesFont (~> 1.0.1)
+    - IQKeyboardManagerSwift
     - SDWebImage
     - SnapKit
+  - IQKeyboardManagerSwift (6.5.11)
   - SDWebImage (5.18.5):
     - SDWebImage/Core (= 5.18.5)
   - SDWebImage/Core (5.18.5)
@@ -32,6 +34,7 @@ SPEC REPOS:
   trunk:
     - Apollo
     - ErxesFont
+    - IQKeyboardManagerSwift
     - SDWebImage
     - SnapKit
     - SQLite.swift
@@ -44,7 +47,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Apollo: f6c6410ebee82dd5846be87b81cedc8bc7754a82
   ErxesFont: 273febbd20994324f57d848c9315ee704f818fe6
-  erxesSDK: f12cb10d845ceebbec081234142faa25a57391e3
+  erxesSDK: 4a48956b46811d5b15518d9cbe5da9391772a6d0
+  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
   SDWebImage: 7ac2b7ddc5e8484c79aa90fc4e30b149d6a2c88f
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3

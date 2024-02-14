@@ -1,9 +1,6 @@
 //
 //  Locale.swift
 //
-//
-//  Created by Soyombo bat-erdene on 8/15/19.
-//
 
 import Foundation
 extension String {

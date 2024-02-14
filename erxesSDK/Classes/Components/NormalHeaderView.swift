@@ -2,9 +2,6 @@
 //  NormalHeaderView.swift
 //  Erxes iOS SDK
 //
-//  Created by soyombo bat-erdene on 5/14/20.
-//  Copyright © 2020 Soyombo bat-erdene. All rights reserved.
-//
 
 import UIKit
 
@@ -19,7 +16,7 @@ class NormalHeaderView: UIView {
     var bgView: UIImageView = {
         let image = UIImage(named: "pattern",in: Erxes.erxesBundle(), compatibleWith: nil)
         let imageView = UIImageView()
-//        imageView.backgroundColor = UIColor.init(hexString: uiOptions?.color ?? "#6569DF")
+        imageView.backgroundColor = UIColor.init(hexString: uiOptions?.color ?? "#6569DF")
         imageView.image = image
         imageView.contentMode = UIView.ContentMode.scaleAspectFill
         imageView.clipsToBounds = true
@@ -50,7 +47,7 @@ class NormalHeaderView: UIView {
     
     lazy var backButton: UIButton = {
         let button = UIButton()
-//        button.setImage(UIImage.erxes(with: .leftarrow3, textColor: .white, size: CGSize(width: 27, height: 27)), for: .normal)
+        button.setImage(UIImage.erxes(with: .leftarrow3, textColor: .white, size: CGSize(width: 27, height: 27)), for: .normal)
         button.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
         return button
     }()
@@ -109,7 +106,7 @@ class NormalHeaderView: UIView {
             make.height.equalTo(64)
         }
         
-//        bgView.backgroundColor = UIColor.init(hexString: uiOptions?.color ?? "#6569DF")
+        bgView.backgroundColor = UIColor.init(hexString: uiOptions?.color ?? "#6569DF")
         
     }
     

@@ -42,5 +42,7 @@ TODO: Add long description of the pod here.
   s.dependency 'Apollo/SQLite'
   s.dependency 'SnapKit'
   s.dependency 'ErxesFont','~> 1.0.1'
+  s.dependency 'SDWebImage'
+  s.dependency 'IQKeyboardManagerSwift'
   
 end

@@ -2,9 +2,6 @@
 //  ConversationUnreadCell.swift
 //  erxesiosdk
 //
-//  Created by Soyombo bat-erdene on 9/2/19.
-//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
-//
 
 import UIKit
 

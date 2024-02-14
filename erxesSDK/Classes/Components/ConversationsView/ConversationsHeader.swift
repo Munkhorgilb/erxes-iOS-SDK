@@ -2,9 +2,6 @@
 //  ConversationHeader.swift
 //  erxesiosdk
 //
-//  Created by Soyombo bat-erdene on 8/19/19.
-//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
-//
 
 import UIKit
 
@@ -98,7 +95,7 @@ class ConversationsHeader: UIView {
             make.left.equalTo(titleLabel)
         }
         
-//        self.roundCorners(corners: [.topLeft,.topRight], radius: 8)
+        self.roundCorners(corners: [.topLeft,.topRight], radius: 8)
         //Custom manually positioning layout goes here (auto-layout pass has already run first pass)
     }
     

@@ -760,11 +760,6 @@ public struct MessageModel: GraphQLFragment {
       internal
       fromBot
       contentType
-      videoCallData {
-        __typename
-        url
-        status
-      }
       botData
       engageData {
         __typename
@@ -799,7 +794,6 @@ public struct MessageModel: GraphQLFragment {
       GraphQLField("internal", type: .scalar(Bool.self)),
       GraphQLField("fromBot", type: .scalar(Bool.self)),
       GraphQLField("contentType", type: .scalar(String.self)),
-      GraphQLField("videoCallData", type: .object(VideoCallDatum.selections)),
       GraphQLField("botData", type: .scalar(Scalar_JSON.self)),
       GraphQLField("engageData", type: .object(EngageDatum.selections)),
       GraphQLField("messengerAppData", type: .scalar(Scalar_JSON.self)),
@@ -813,8 +807,8 @@ public struct MessageModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(_id: String, customerId: String? = nil, conversationId: String? = nil, user: User? = nil, content: String? = nil, createdAt: Scalar_Date? = nil, `internal`: Bool? = nil, fromBot: Bool? = nil, contentType: String? = nil, videoCallData: VideoCallDatum? = nil, botData: Scalar_JSON? = nil, engageData: EngageDatum? = nil, messengerAppData: Scalar_JSON? = nil, attachments: [Attachment?]? = nil) {
-    self.init(unsafeResultMap: ["__typename": "ConversationMessage", "_id": _id, "customerId": customerId, "conversationId": conversationId, "user": user.flatMap { (value: User) -> ResultMap in value.resultMap }, "content": content, "createdAt": createdAt, "internal": `internal`, "fromBot": fromBot, "contentType": contentType, "videoCallData": videoCallData.flatMap { (value: VideoCallDatum) -> ResultMap in value.resultMap }, "botData": botData, "engageData": engageData.flatMap { (value: EngageDatum) -> ResultMap in value.resultMap }, "messengerAppData": messengerAppData, "attachments": attachments.flatMap { (value: [Attachment?]) -> [ResultMap?] in value.map { (value: Attachment?) -> ResultMap? in value.flatMap { (value: Attachment) -> ResultMap in value.resultMap } } }])
+  public init(_id: String, customerId: String? = nil, conversationId: String? = nil, user: User? = nil, content: String? = nil, createdAt: Scalar_Date? = nil, `internal`: Bool? = nil, fromBot: Bool? = nil, contentType: String? = nil, botData: Scalar_JSON? = nil, engageData: EngageDatum? = nil, messengerAppData: Scalar_JSON? = nil, attachments: [Attachment?]? = nil) {
+    self.init(unsafeResultMap: ["__typename": "ConversationMessage", "_id": _id, "customerId": customerId, "conversationId": conversationId, "user": user.flatMap { (value: User) -> ResultMap in value.resultMap }, "content": content, "createdAt": createdAt, "internal": `internal`, "fromBot": fromBot, "contentType": contentType, "botData": botData, "engageData": engageData.flatMap { (value: EngageDatum) -> ResultMap in value.resultMap }, "messengerAppData": messengerAppData, "attachments": attachments.flatMap { (value: [Attachment?]) -> [ResultMap?] in value.map { (value: Attachment?) -> ResultMap? in value.flatMap { (value: Attachment) -> ResultMap in value.resultMap } } }])
   }
 
   public var __typename: String {
@@ -904,15 +898,6 @@ public struct MessageModel: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "contentType")
-    }
-  }
-
-  public var videoCallData: VideoCallDatum? {
-    get {
-      return (resultMap["videoCallData"] as? ResultMap).flatMap { VideoCallDatum(unsafeResultMap: $0) }
-    }
-    set {
-      resultMap.updateValue(newValue?.resultMap, forKey: "videoCallData")
     }
   }
 

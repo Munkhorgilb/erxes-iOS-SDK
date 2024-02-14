@@ -5,6 +5,7 @@
 
 import UIKit
 import Foundation
+import IQKeyboardManagerSwift
 
 var lang = "en"
 var API_URL = "http://localhost:3300"
@@ -40,7 +41,6 @@ func clearVisitorId() {
 }
 
 @objc public class Erxes: NSObject {
-
     static func storeEmail(value: String) {
         customerEmail = value
         UserDefaults().set(customerEmail, forKey: "email")
@@ -76,7 +76,6 @@ func clearVisitorId() {
 
     static func restore() {
         let defaults = UserDefaults()
-
         if let email = defaults.string(forKey: "email") {
             customerEmail = email
         }
@@ -98,8 +97,8 @@ func clearVisitorId() {
     @objc public static func setup(erxesApiUrl: String? = nil, organizationName: String? = nil, brandId: String, email: String? = nil, phone: String? = nil, code: String? = nil, data: String? = nil, companyData: String? = nil) {
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
 
-//        IQKeyboardManager.shared.enable = true
-//        IQKeyboardManager.shared.disabledToolbarClasses.append(MessengerView.self)
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.disabledToolbarClasses.append(MessengerView.self)
 
         restore()
         brandCode = brandId
@@ -288,47 +287,44 @@ func clearVisitorId() {
     static func forceBridgeFromObjectiveC(_ value: Any) -> Any {
 
         switch value {
-
-        case is NSString:
-            return value as! String
-
-        case is Bool:
-            return value as! Bool
-        case is Int:
-            return value as! Int
-        case is Int64:
-            return value as! Int64
-        case is Double:
-            return value as! Double
-        case is NSDictionary:
-            return Dictionary(uniqueKeysWithValues: (value as! NSDictionary).map { ($0.key as! AnyHashable, forceBridgeFromObjectiveC($0.value)) })
-        case is NSArray:
-            return (value as? NSArray).map { forceBridgeFromObjectiveC($0) } as Any
-        default:
-            return value
-        }
+            case is NSString:
+                return value as! String
+            case is Bool:
+                return value as! Bool
+            case is Int:
+                return value as! Int
+            case is Int64:
+                return value as! Int64
+            case is Double:
+                return value as! Double
+            case is NSDictionary:
+                return Dictionary(uniqueKeysWithValues: (value as! NSDictionary).map { ($0.key as! AnyHashable, forceBridgeFromObjectiveC($0.value)) })
+            case is NSArray:
+                return (value as? NSArray).map { forceBridgeFromObjectiveC($0) } as Any
+            default:
+                return value
+            }
     }
 
 
 
     @objc private static func openErxes() {
-        if var topController = UIApplication.shared.keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
+        if let topController = UIApplication.shared.windows.first?.rootViewController {
+            var currentController = topController
+            while let presentedViewController = currentController.presentedViewController {
+                currentController = presentedViewController
             }
 
             let navigationController = MainNavigationController()
             navigationController.modalPresentationStyle = .custom
             navigationController.isNavigationBarHidden = true
-
             if (messengerData?.requireAuth)! {
                 if UserDefaults().bool(forKey: "authenticated") {
                     let controller = HomeView()
-
                     navigationController.viewControllers.insert(controller, at: 0)
                 } else {
                     let controller = AuthtenticationView()
-
+                    
                     navigationController.viewControllers.insert(controller, at: 0)
                 }
             } else {
@@ -336,8 +332,7 @@ func clearVisitorId() {
 
                 navigationController.viewControllers.insert(controller, at: 0)
             }
-
-            topController.present(navigationController, animated: true, completion: nil)
+            currentController.present(navigationController, animated: true, completion: nil)
         }
     }
 
@@ -355,7 +350,7 @@ func clearVisitorId() {
         customerPhoneNumber = ""
         customerId = nil
         integrationId = ""
-//        IQKeyboardManager.shared.enable = false
+        IQKeyboardManager.shared.enable = false
         visitorId = getVisitorId()
         completionHandler()
     }

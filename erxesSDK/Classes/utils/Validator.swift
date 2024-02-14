@@ -2,9 +2,6 @@
 //  Validator.swift
 //  GIZ
 //
-//  Created by Soyombo bat-erdene on 10/31/18.
-//  Copyright © 2018 Soyombo bat-erdene. All rights reserved.
-//
 
 import Foundation
 import UIKit
@@ -36,7 +33,7 @@ extension String: Evaluatable {
 }
 
 func isPhoneNumberValid(text: String) -> Bool {
-    let regexp = "^[0-9]{6,}$"
+    let regexp = "^[0-9]{8,}$"
     return text.evaluate(with: regexp)
 }
 

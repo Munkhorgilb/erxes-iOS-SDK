@@ -2,9 +2,6 @@
 //  HomeService.swift
 //  Erxes iOS SDK
 //
-//  Created by soyombo bat-erdene on 4/30/20.
-//  Copyright © 2020 Soyombo bat-erdene. All rights reserved.
-//
 
 import Foundation
 
@@ -15,7 +12,7 @@ class HomeService: HomeServiceProtocol {
     func widgetsMessengerSupporters(success: @escaping ([UserModel]) -> (), failure: @escaping (String) -> ()) {
         let query = WidgetsMessengerSupportersQuery(integrationId: integrationId)
 
-        ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
+        ErxesClient.shared.client.fetch(query: query) { result in
 
             switch result {
 
@@ -32,6 +29,7 @@ class HomeService: HomeServiceProtocol {
 
                 }
             case .failure(let error):
+                print(error.localizedDescription, "widgetsMessengerSupporters error")
                 failure(error.localizedDescription)
             }
         }
@@ -41,7 +39,7 @@ class HomeService: HomeServiceProtocol {
 
         let query = WidgetsConversationsQuery(integrationId: integrationId, customerId: customerId, visitorId: visitorId)
   
-        ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheCompletely) { result in
+        ErxesClient.shared.client.fetch(query: query) { result in
 
             switch result {
 
@@ -58,6 +56,7 @@ class HomeService: HomeServiceProtocol {
 
                 }
             case .failure(let error):
+                print(error.localizedDescription, "Error widgetsConversations")
                 failure(error.localizedDescription)
             }
         }
@@ -92,7 +91,7 @@ class HomeService: HomeServiceProtocol {
     func formDetail(id: String, success: @escaping (FormModel) -> (), failure: @escaping (String) -> ()) {
         let query = FormDetailQuery(_id: id)
 
-        ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
+        ErxesClient.shared.client.fetch(query: query) { result in
 
             switch result {
 
@@ -145,7 +144,7 @@ class HomeService: HomeServiceProtocol {
 
     func unreadCount(conversationId: String, success: @escaping (Int) -> (), failure: @escaping (String) -> ()) {
         let query = WidgetsUnreadCountQuery(conversationId: conversationId)
-        ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
+        ErxesClient.shared.client.fetch(query: query) { result in
             switch result {
 
             case .success(let graphQLResult):
@@ -168,29 +167,29 @@ class HomeService: HomeServiceProtocol {
         }
     }
 
-//    func knowledgeBaseTopic(topicId: String, success: @escaping (KnowledgeBaseTopicModel) -> (), failure: @escaping (String) -> ()) {
-//        let query = KnowledgeBaseTopicDetailQuery(id: topicId)
-//
-//        ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
-//
-//            switch result {
-//
-//            case .success(let graphQLResult):
-//
-//                if let response = graphQLResult.data?.knowledgeBaseTopicDetail?.fragments.knowledgeBaseTopicModel {
-//
-//                    success(response)
-//                }
-//
-//                if let errors = graphQLResult.errors {
-//
-//                    let error = errors.compactMap({ $0.localizedDescription }).joined(separator: ", ")
-//                    failure(error)
-//
-//                }
-//            case .failure(let error):
-//                failure(error.localizedDescription)
-//            }
-//        }
-//    }
+    func knowledgeBaseTopic(topicId: String, success: @escaping (KnowledgeBaseTopicModel) -> (), failure: @escaping (String) -> ()) {
+        let query = KnowledgeBaseTopicDetailQuery(id: topicId)
+
+        ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
+
+            switch result {
+
+            case .success(let graphQLResult):
+
+                if let response = graphQLResult.data?.knowledgeBaseTopicDetail?.fragments.knowledgeBaseTopicModel {
+
+                    success(response)
+                }
+
+                if let errors = graphQLResult.errors {
+
+                    let error = errors.compactMap({ $0.localizedDescription }).joined(separator: ", ")
+                    failure(error)
+
+                }
+            case .failure(let error):
+                failure(error.localizedDescription)
+            }
+        }
+    }
 }
