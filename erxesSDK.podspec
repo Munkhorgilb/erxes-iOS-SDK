@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/Munkh-orgil/erxesSDK'
+  s.homepage         = 'https://github.com/Munkhorgilb/erxes-iOS-SDK'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Munkh-orgil' => 'monkhorgilbayarbaatar@gmail.com' }
-  s.source           = { :git => 'https://github.com/Munkh-orgil/erxesSDK.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/Munkhorgilb/erxes-iOS-SDK.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '13.0'
