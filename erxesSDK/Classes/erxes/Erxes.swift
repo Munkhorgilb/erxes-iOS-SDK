@@ -113,6 +113,8 @@ func clearVisitorId() {
         if (API_URL.last == "/") {
             API_URL = String(API_URL.dropLast())
         }
+        
+        print(API_URL, "URL")
 
         ErxesClient.shared.setupClient(apiUrlString: API_URL)
 

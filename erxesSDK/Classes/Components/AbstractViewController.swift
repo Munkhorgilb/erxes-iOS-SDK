@@ -82,8 +82,6 @@ class AbstractViewController: UIViewController {
     }
 
     func presentViewControllerAsPopover(viewController: UIViewController, from: UIView) {
-
-
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController

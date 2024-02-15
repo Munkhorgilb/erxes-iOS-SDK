@@ -27,7 +27,13 @@ class MainNavigationController: UINavigationController {
         view.addGestureRecognizer(panGesture)
         let presentingViewController = self.presentingViewController
         presentingViewController?.view.addSubview(backgroundView)
-        backgroundView.frame = presentingViewController?.view.bounds as! CGRect
+        if let presentingView = presentingViewController?.view {
+            backgroundView.frame = presentingView.bounds
+        } else {
+            // Handle the case where presentingViewController or its view is nil
+            // For example, you can log an error or take appropriate action.
+            print("presentingViewController error")
+        }
     }
 
 }

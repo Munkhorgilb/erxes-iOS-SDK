@@ -206,7 +206,7 @@ class MainHeaderView: UIView {
         
         linksView.addArrangedSubview(spacerView)
         
-        if ((messengerData?.links?.facebook) != nil) || (messengerData?.links?.facebook?.count != 0) {
+        if ((messengerData?.links?.facebook) != nil) || (messengerData?.links?.facebook?.count != 0){
             self.linksView.addArrangedSubview(facebookButton)
             facebookButton.snp.makeConstraints { (make) in
                 make.height.width.equalTo(30)
@@ -315,8 +315,6 @@ class MainHeaderView: UIView {
             UIApplication.shared.openURL(url)
         }
     }
-
-
 }
 
 
