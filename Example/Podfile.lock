@@ -28,6 +28,7 @@ PODS:
   - Starscream (3.1.1)
 
 DEPENDENCIES:
+  - Apollo
   - erxesSDK (from `../`)
 
 SPEC REPOS:
@@ -47,13 +48,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Apollo: f6c6410ebee82dd5846be87b81cedc8bc7754a82
   ErxesFont: 273febbd20994324f57d848c9315ee704f818fe6
-  erxesSDK: 4a48956b46811d5b15518d9cbe5da9391772a6d0
+  erxesSDK: 0af2f6a2cd9282a5f158c3caf2bd15ef0210f774
   IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
   SDWebImage: 7ac2b7ddc5e8484c79aa90fc4e30b149d6a2c88f
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 4d324f1ffc913937d1f8c4f94aa4dea5c0153395
+PODFILE CHECKSUM: ee785eb19e04a76ad7868f840c82410f080a8e63
 
 COCOAPODS: 1.14.3

@@ -82,25 +82,26 @@ class AbstractViewController: UIViewController {
     }
 
     func presentViewControllerAsPopover(viewController: UIViewController, from: UIView) {
-        if var topController = UIApplication.shared.keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-            }
-            viewController.modalPresentationStyle = .popover
-            let viewPresentationController = viewController.popoverPresentationController
-            if let presentationController = viewPresentationController {
-                presentationController.delegate = self
-                presentationController.permittedArrowDirections = .up
-                presentationController.sourceView = from
-                presentationController.sourceRect = from.bounds
-            }
-            let moreViewWidth = ("End conversation".localized(lang)).widthOfString(usingFont: UIFont.systemFont(ofSize: 13)) + 50
-            viewController.preferredContentSize = CGSize(width: moreViewWidth, height: 80)
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = scene.windows.first {
+                var topController = window.rootViewController
+                while let presentedViewController = topController?.presentedViewController {
+                    topController = presentedViewController
+                }
+                viewController.modalPresentationStyle = .popover
+                let viewPresentationController = viewController.popoverPresentationController
+                if let presentationController = viewPresentationController {
+                    presentationController.delegate = self
+                    presentationController.permittedArrowDirections = .up
+                    presentationController.sourceView = from
+                    presentationController.sourceRect = from.bounds
+                }
+                let moreViewWidth = ("End conversation".localized(lang)).widthOfString(usingFont: UIFont.systemFont(ofSize: 13)) + 50
+                viewController.preferredContentSize = CGSize(width: moreViewWidth, height: 80)
 
-            topController.present(viewController, animated: true, completion: nil)
+                topController?.present(viewController, animated: true, completion: nil)
+            }
         }
-
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -165,31 +166,32 @@ extension AbstractViewController: UIPopoverPresentationControllerDelegate {
     }
 }
 
-    extension AbstractViewController: MoreViewDelegate {
-        func close() {
-            if var topController = UIApplication.shared.keyWindow?.rootViewController {
-                while let presentedViewController = topController.presentedViewController {
-                    topController = (presentedViewController as? UINavigationController)!
-                    topController.dismiss(animated: true, completion: nil)
-                    let nav = self.navigationController as? MainNavigationController
-                    nav!.backgroundView.removeFromSuperview()
-                }
-
+extension AbstractViewController: MoreViewDelegate {
+    func close() {
+        if let mainWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
+           var topController = mainWindow.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
             }
-        }
-
-        func end() {
-            if var topController = UIApplication.shared.keyWindow?.rootViewController {
-                while let presentedViewController = topController.presentedViewController {
-                    topController = (presentedViewController as? UINavigationController)!
-
-                    topController.dismiss(animated: true) {
-                        Erxes.endSession()
-                        let nav = self.navigationController as? MainNavigationController
-                        nav!.backgroundView.removeFromSuperview()
-                    }
-                }
-
+            topController.dismiss(animated: true, completion: nil)
+            if let nav = self.navigationController as? MainNavigationController {
+                nav.backgroundView.removeFromSuperview()
             }
         }
     }
+
+    func end() {
+        if let mainWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
+           var topController = mainWindow.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            topController.dismiss(animated: true) {
+                Erxes.endSession()
+                if let nav = self.navigationController as? MainNavigationController {
+                    nav.backgroundView.removeFromSuperview()
+                }
+            }
+        }
+    }
+}

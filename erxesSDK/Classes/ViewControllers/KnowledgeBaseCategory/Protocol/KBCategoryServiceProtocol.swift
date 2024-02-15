@@ -9,8 +9,5 @@
 import Foundation
 
 protocol KBCategoryServiceProtocol {
-
-  
-   
     func knowledgeBaseCategoriesDetail(categoryId:String,success: @escaping(_ data: KbModel) -> (), failure: @escaping(_ errorClosure: String) -> ())
 }

@@ -57,12 +57,7 @@ class KBCategoryView: AbstractViewController {
         return tableView
     }()
     // VARIABLES HERE
-    
-    
-  
-    
-   
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
      

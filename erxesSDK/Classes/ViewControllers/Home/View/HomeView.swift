@@ -66,13 +66,9 @@ class HomeView: AbstractViewController {
 
     var segmentedControl: SegmentedControl = {
         let control = SegmentedControl()
-
-
         control.selectorTextColor = UIColor(hexString: uiOptions?.color ?? defaultColorCode)!
-        control.setButtonTitles(buttonTitles: ["Support".localized(lang).uppercased(), "Faq".localized(lang).uppercased()])
+        control.setButtonTitles(buttonTitles: ["Support".localized(lang), "Faq".localized(lang)])
         control.selectorViewColor = UIColor(hexString: uiOptions?.color ?? defaultColorCode)!
-
-
         return control
     }()
 
@@ -86,7 +82,6 @@ class HomeView: AbstractViewController {
 //    var formId: String?
     var knowledgeBase: KnowledgeBaseTopicModel = KnowledgeBaseTopicModel() {
         didSet {
-
             self.knowledgeBaseTableView.reloadData()
         }
     }
@@ -97,7 +92,6 @@ class HomeView: AbstractViewController {
         super.viewDidLoad()
         
         topOffset = 60
-        self.view.backgroundColor = .clear
         self.setupViewModel()
 
         if ((messengerData?.knowledgeBaseTopicId) != nil) && messengerData?.knowledgeBaseTopicId?.count != 0 {

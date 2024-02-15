@@ -14,9 +14,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-//        Erxes.setup(erxesApiUrl: "https://office.erxes.io/gateway", brandId: "tBdZg4")
+        Erxes.setup(erxesApiUrl: "https://office.erxes.io/gateway", brandId: "tBdZg4")
 //        Erxes.setup(erxesApiUrl: "https://office.erxes.io/gateway", brandId: "HGjG2_")
-          Erxes.setup(erxesApiUrl: "https://erxes.priuscenter.mn/gateway", brandId: "wEcdSa")
+//          Erxes.setup(erxesApiUrl: "https://erxes.priuscenter.mn/gateway", brandId: "wEcdSa")
 //        Erxes.setup(erxesApiUrl: "https://orgil.app.erxes.io", organizationName: "orgil", brandId: "7-rCr1")
         
         let button = UIButton(type:  .system)

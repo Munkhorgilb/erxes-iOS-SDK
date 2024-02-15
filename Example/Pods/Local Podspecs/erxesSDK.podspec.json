@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "summary": "A short description of erxesSDK.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/Munkh-orgil/erxesSDK",
+  "homepage": "https://github.com/Munkhorgilb/erxes-iOS-SDK",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,7 +12,7 @@
     "Munkh-orgil": "monkhorgilbayarbaatar@gmail.com"
   },
   "source": {
-    "git": "https://github.com/Munkh-orgil/erxesSDK.git",
+    "git": "https://github.com/Munkhorgilb/erxes-iOS-SDK.git",
     "tag": "0.1.0"
   },
   "platforms": {
