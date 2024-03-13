@@ -12,9 +12,7 @@ class KBDetailViewController: AbstractViewController {
 
     var model: KbArticleModel = KbArticleModel() {
         didSet{
-            
             self.tableView.reloadData()
-
         }
     }
      
@@ -24,8 +22,8 @@ class KBDetailViewController: AbstractViewController {
         button.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
         return button
     }()
-    // VARIABLES HERE
     
+    // VARIABLES HERE
     var titleLabel: UILabel = {
        let label = UILabel()
         return label
@@ -45,10 +43,6 @@ class KBDetailViewController: AbstractViewController {
        let label = UILabel()
         return label
     }()
-    
-
-
-
     
     let header = NormalHeaderView()
     
@@ -73,9 +67,7 @@ class KBDetailViewController: AbstractViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         topOffset = 60
-  
         prepareViews()
-        
     }
     
     func prepareViews(){
@@ -87,7 +79,6 @@ class KBDetailViewController: AbstractViewController {
         header.backButtonHandler = {
             self.navigationController?.popViewController(animated: true)
         }
-        
         header.moreButtonHandler = {
             self.moreAction(sender: self.header.moreButton)
         }
@@ -106,7 +97,6 @@ class KBDetailViewController: AbstractViewController {
     }
 
 }
-
 
 extension KBDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,7 +140,6 @@ extension KBDetailViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             cell.textLabel!.text = ""
         }
-        
         return cell
     }
     

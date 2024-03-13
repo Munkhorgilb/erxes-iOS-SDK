@@ -2,17 +2,12 @@
 //  KBCategoryView.swift
 //  erxesiosdk
 //
-//  Created by Soyombo bat-erdene on 8/28/19.
-//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
-//
 
 import UIKit
 
 class KBCategoryView: AbstractViewController {
 
     // OUTLETS HERE
-    
-    
     var searchField: UITextField = {
         let searchField = UITextField(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH-20, height: 40))
         let padding = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
@@ -41,43 +36,33 @@ class KBCategoryView: AbstractViewController {
     var subTitle: String?
     var categoryId = String()
     var searchArray = [KbArticleModel]()
-  
-    
-   let header = NormalHeaderView()
+
+    let header = NormalHeaderView()
     
      var tableView: UITableView = {
         let tableView = UITableView()
-       
         tableView.register(KBCategoryCell.self, forCellReuseIdentifier: "KBCategoryCell")
         tableView.tableFooterView = UIView()
-        
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         return tableView
     }()
+    
     // VARIABLES HERE
-
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-     
         header.snp.makeConstraints { (make) in
             make.top.equalTo(containerView)
             make.left.right.equalToSuperview()
             make.height.equalTo(64)
         }
-        
-   
-        
         tableView.snp.makeConstraints({ (make) in
             make.bottom.left.right.equalToSuperview()
-            make.top.equalToSuperview().offset(64)
+            make.top.equalToSuperview().offset(52)
         })
-        
         containerView.roundCorners(corners: [.topLeft, .topRight], radius: 8)
-        
     }
-    
     
     var viewModel = KBCategoryViewModel()
 
@@ -90,16 +75,12 @@ class KBCategoryView: AbstractViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.viewModel.knowledgeBaseCategoriesDetail(categoryId: self.categoryId)
     }
     
     func prepareViews(){
         self.view.backgroundColor = .clear
-        
         self.containerView.addSubview(tableView)
-        
-
         self.searchField.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -108,47 +89,34 @@ class KBCategoryView: AbstractViewController {
         header.backButtonHandler = {
             self.navigationController?.popViewController(animated: true)
         }
-        
         header.moreButtonHandler = {
             self.moreAction(sender: self.header.moreButton)
         }
     }
     
     fileprivate func setupViewModel() {
-
         self.viewModel.showAlertClosure = {
             let alert = self.viewModel.alertMessage ?? ""
-           
         }
-        
         self.viewModel.updateLoadingStatus = {
             self.tableView.activityIndicatorView.center = self.tableView.center
             if self.viewModel.isLoading {
-                print("startAnimating")
                 self.tableView.activityIndicatorView.startAnimating()
             } else {
-                print("stopAnimating")
                 self.tableView.activityIndicatorView.stopAnimating()
             }
         }
-
         self.viewModel.internetConnectionStatus = {
-            
             // show UI Internet is disconnected
         }
-
         self.viewModel.serverErrorStatus = {
    
         }
-
         self.viewModel.didGetData = { data in
-   
             if let _articles = data.articles?.map({$0?.fragments.kbArticleModel}) {
                 self.articles = _articles
             }
-            
         }
-
     }
     
     @objc func backAction(sender: UIButton) {
@@ -160,19 +128,15 @@ class KBCategoryView: AbstractViewController {
         if sender.text?.count != 0 {
             if let search = sender.text {
                 self.searchArray = self.articles.filter({($0?.content?.contains(search))! || ($0?.title?.contains(search))! || ($0?.summary?.contains(search))!}) as! [KbArticleModel]
-                
             }
-            
         }
         self.tableView.reloadData()
     }
     
 }
 
-
 extension KBCategoryView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if searchField.text?.count == 0 {
             return self.articles.count
         }else {
@@ -184,20 +148,16 @@ extension KBCategoryView: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "KBCategoryCell", for: indexPath) as? KBCategoryCell {
             if searchField.text?.count == 0 {
                 if let model = self.articles[indexPath.row] {
-                    
                     cell.setup(model: model)
                     cell.layoutIfNeeded()
                 }
                 return cell
             }else {
                 let model = self.searchArray[indexPath.row]
-                    
                     cell.setup(model: model)
                     cell.layoutIfNeeded()
-                
                 return cell
             }
-            
         }
         return UITableViewCell()
     }
@@ -205,12 +165,10 @@ extension KBCategoryView: UITableViewDelegate, UITableViewDataSource {
  
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let model = self.articles[indexPath.row] {
-            
             let controller = KBDetailViewController()
             controller.model = model
             self.navigationController?.pushViewController(controller, animated: true)
         }
-
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -223,9 +181,9 @@ extension KBCategoryView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
       return 60
-        
     }
 }
+
 extension KBCategoryView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)

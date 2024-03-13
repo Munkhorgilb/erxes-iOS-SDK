@@ -2,9 +2,6 @@
 //  KBCategoryCell.swift
 //  erxesiosdk
 //
-//  Created by Soyombo bat-erdene on 8/28/19.
-//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
-//
 
 import UIKit
 
@@ -41,9 +38,6 @@ class KBCategoryCell: UITableViewCell {
         return label
     }()
     
-
-    
-    
     var line: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
@@ -53,7 +47,6 @@ class KBCategoryCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         self.setupConstraint()
     }
     
@@ -66,31 +59,26 @@ class KBCategoryCell: UITableViewCell {
     
     func setupConstraint() {
         self.backgroundColor = .white
+        let padding: CGFloat = 14
         iconView.snp.makeConstraints { (make) in
-            make.left.top.equalToSuperview().offset(8)
+            make.left.top.equalToSuperview().offset(padding)
             make.width.height.equalTo(44)
         }
         
         iconView.layer.cornerRadius = 22
         iconView.clipsToBounds = true
         
-        
-        
-        
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(iconView.snp.right).offset(8)
-            make.right.equalToSuperview().offset(-8)
+            make.left.equalTo(iconView.snp.right).offset(padding)
+            make.right.equalToSuperview().offset(-padding)
             make.top.equalTo(iconView)
-            
         }
         
-    
-        
         subtitleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(iconView.snp.right).offset(8)
-            make.right.equalToSuperview().offset(-8)
-            make.bottom.equalToSuperview().offset(-8)
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.left.equalTo(iconView.snp.right).offset(padding)
+            make.right.equalToSuperview().offset(-padding)
+            make.bottom.equalToSuperview().offset(-padding)
+            make.top.equalTo(titleLabel.snp.bottom).offset(padding)
         }
         
         line.snp.makeConstraints { (make) in
@@ -100,20 +88,14 @@ class KBCategoryCell: UITableViewCell {
         }
     }
     
-    
-    
     func setup(model: KbArticleModel) {
         self.titleLabel.text = model.title
         self.subtitleLabel.text = model.summary
         self.iconView.image =  UIImage.erxes(with: .clipboard, textColor: .darkGray, size: CGSize(width: 40, height: 40), backgroundColor: .clear).scale(by: 0.5)
-
         setNeedsLayout()
     }
     
-    
     override func prepareForReuse() {
         super.prepareForReuse()
-        
     }
-
 }

@@ -45,7 +45,7 @@
 		85F714825066AEFC7E35C5F0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		8ED4A9755720C64A89531AB3 /* Pods-erxesSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-erxesSDK_Tests.release.xcconfig"; path = "Target Support Files/Pods-erxesSDK_Tests/Pods-erxesSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E2827B743CE7A92D67FC250A /* Pods_erxesSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_erxesSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F5CAAF21BEC18DC31C537ADD /* erxesSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = erxesSDK.podspec; path = ../erxesSDK.podspec; sourceTree = "<group>"; };
+		F5CAAF21BEC18DC31C537ADD /* erxesSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = erxesSDK.podspec; path = ../erxesSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FCF4E8712A8DC139067B1393 /* Pods-erxesSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-erxesSDK_Example.debug.xcconfig"; path = "Target Support Files/Pods-erxesSDK_Example/Pods-erxesSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

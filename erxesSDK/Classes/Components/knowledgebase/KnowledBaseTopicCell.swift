@@ -116,7 +116,6 @@ class KnowledBaseTopicCell: UITableViewCell {
             if let rawValue = fontDict[icon] {
                 if let font: ErxesFont = ErxesFont(rawValue: rawValue) {
                     self.iconView.image =  UIImage.erxes(with: font, textColor: .darkGray, size: CGSize(width: 40, height: 40), backgroundColor: .clear).scale(by: 0.5)
-
                 }
             }
 

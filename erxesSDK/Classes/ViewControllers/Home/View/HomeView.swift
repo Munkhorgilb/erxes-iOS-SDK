@@ -11,7 +11,6 @@ import MobileCoreServices
 class HomeView: AbstractViewController {
 
     // OUTLETS HERE
-
     var searchField: UITextField = {
         let searchField = UITextField(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH - 20, height: 40))
         let padding = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
@@ -24,9 +23,9 @@ class HomeView: AbstractViewController {
         searchField.rightViewMode = .always
         searchField.rightView = icon
         searchField.borderStyle = .roundedRect
-        searchField.addTarget(HomeView.self, action: #selector(searchAction(sender:)), for: .editingChanged)
-        searchField.addTarget(HomeView.self, action: #selector(beginSearchAnimation(sender:)), for: .editingDidBegin)
-        searchField.addTarget(HomeView.self, action: #selector(endSearchAnimation(sender:)), for: .editingDidEnd)
+        searchField.addTarget(self, action: #selector(searchAction(sender:)), for: .editingChanged)
+        searchField.addTarget(self, action: #selector(beginSearchAnimation(sender:)), for: .editingDidBegin)
+        searchField.addTarget(self, action: #selector(endSearchAnimation(sender:)), for: .editingDidEnd)
         return searchField
     }()
     let headerView = MainHeaderView()
@@ -119,45 +118,8 @@ class HomeView: AbstractViewController {
         scrollView.addSubview(stackView)
 
         stackView.addArrangedSubview(conversationsView)
-        
+
         self.viewModel.getSupporters()
-
-//        if (formCode != nil) && formCode.count != 0 {
-//            stackView.addArrangedSubview(formView)
-//            self.viewModel.connectLead()
-//        }
-
-//        if let websiteApps = messengerData?.websiteApps {
-//            for (i, websiteApp) in websiteApps.enumerated() {
-//                guard let data = websiteApp else { continue }
-//                let websiteVIew = WebsiteAppView()
-//                stackView.insertArrangedSubview(websiteVIew, at: stackView.arrangedSubviews.count)
-//                websiteVIew.setData(data: data)
-//                websiteVIew.tag = i
-//                websiteVIew.didTapHandler = {
-//                    let controller = EmbedWebViewController()
-//                    controller.data = data
-//                    self.navigationController?.pushViewController(controller, animated: true)
-//                }
-//
-//                websiteVIew.snp.makeConstraints { (make) in
-//                    make.left.right.equalToSuperview().inset(8)
-//                    make.width.equalTo(SCREEN_WIDTH - 16)
-//                }
-//            }
-//
-//        }
-
-
-//        picker.delegate = self
-//        cameraPicker.delegate = self
-//
-//        fusumaTintColor = UIColor(hexString: (uiOptions?.color) ?? defaultColorCode)!
-//        fusumaTitleFont = UIFont.boldSystemFont(ofSize: 15)
-//
-//        picker.allowMultipleSelection = false
-//        cameraPicker.allowMultipleSelection = false
-
          headerView.moreButtonHandler = {
              self.moreAction(sender: self.headerView.rightButton)
          }
@@ -193,7 +155,6 @@ class HomeView: AbstractViewController {
             make.top.left.right.equalToSuperview()
         }
 
-
         segmentContainer.snp.makeConstraints { (make) in
             make.top.equalTo(headerView.snp.bottom)
             make.left.right.equalToSuperview()
@@ -203,74 +164,47 @@ class HomeView: AbstractViewController {
                 make.height.equalTo(0)
             }
         }
-
         segmentedControl.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-
         scrollView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
             make.top.equalToSuperview().offset(0)
         }
-
         stackView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-
         conversationsView.snp.makeConstraints { (make) in
             make.left.right.top.equalToSuperview().inset(8)
             make.width.equalTo(SCREEN_WIDTH - 16)
-
         }
-
-//        if stackView.arrangedSubviews.contains(formView) {
-//            formView.snp.makeConstraints { (make) in
-//                make.left.right.equalToSuperview().inset(8)
-//                make.width.equalTo(SCREEN_WIDTH - 16)
-//            }
-//        }
-
         scrollInsetHeight = CGFloat(headerView.frame.height + segmentContainer.frame.height + 10)
         scrollView.contentInset = UIEdgeInsets(top: scrollInsetHeight, left: 0, bottom: 0, right: 0)
         scrollView.contentSize = CGSize(width: stackView.frame.width, height: stackView.frame.height)
-
         knowledgeBaseTableView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(segmentContainer.snp.bottom).offset(2)
         }
-
     }
 
     fileprivate func setupViewModel() {
-
-//        self.viewModel.showAlertClosure = {
-//            let alert = self.viewModel.alertMessage ?? ""
-//           
-//        }
-
         self.viewModel.updateLoadingStatus = {
             if self.viewModel.isLoading {
-                print("isLoading")
+                
             } else {
                 
             }
         }
-
         self.viewModel.internetConnectionStatus = {
-            
             // show UI Internet is disconnected
         }
-
         self.viewModel.serverErrorStatus = { error in
-            
             // show UI Server is Error
         }
-
         self.viewModel.didGetSupporters = { users in
             self.supporters = users
             self.headerView.setSupporters(supporters: users)
         }
-
         self.viewModel.didGetConversations = { conversations in
             self.conversationsView.setConversations(conversations: conversations)
             self.conversationsView.didTapHandler = {
@@ -281,93 +215,6 @@ class HomeView: AbstractViewController {
                 self.navigateMessenger(conversations[row]._id, supporter)
             }
         }
-
-//        self.viewModel.didGetLead = { data in
-//            guard let formid = data.form?._id else { return }
-//            self.formId = formid
-//            if let leadDataJson = data.integration?.leadData {
-//                do {
-//                    leadData = try LeadData(from: leadDataJson) { decoder in
-//                        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//                    }
-//                } catch {
-//                    print("Error: \(error)")
-//                }
-//            }
-//
-//            self.viewModel.formDetail(id: formid)
-//
-//
-//        }
-
-//        self.viewModel.didGetFormDetail = { data in
-//            self.formView.titleLabel.text = leadData?.callout?.title
-//            self.formView.descriptionLabel.text = leadData?.callout?.body
-//            self.formView.thankMessage = leadData?.thankContent! ?? "Thank you"
-//            self.formView.button.setTitle(leadData?.callout?.buttonText, for: .normal)
-//            self.formView.button.addTarget(self, action: #selector(self.openForm(sender:)), for: .touchUpInside)
-//            self.formView.didTapOpenFile = {
-//                self.view.endEditing(true)
-//                let alertContoller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//                let fileAction = UIAlertAction(title: "Open file browser", style: .default) { (action) in
-//                    alertContoller.dismiss(animated: true) {
-//
-////                        let fileBrowser = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .open)
-//                        let fileBrowser = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .open)
-//                        fileBrowser.delegate = self
-//                        fileBrowser.view.tintColor = UIColor(hexString: uiOptions?.color ?? defaultColorCode)
-//                        self.present(fileBrowser, animated: true, completion: nil)
-//
-//                    }
-//                }
-//
-//                let photosAction = UIAlertAction(title: "Choose from library", style: .default) { (action) in
-//
-//                    alertContoller.dismiss(animated: true) {
-//
-//                        self.picker.availableModes = [.library]
-//                        self.present(self.picker, animated: true, completion: nil)
-//                    }
-//                }
-//
-//                let cameraAction = UIAlertAction(title: "Take a photo", style: .default) { (action) in
-//                    alertContoller.dismiss(animated: true) {
-//
-//                        self.cameraPicker.availableModes = [.camera]
-//                        self.present(self.cameraPicker, animated: true, completion: nil)
-//                    }
-//                }
-//
-//                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-//
-//                alertContoller.addAction(fileAction)
-//                alertContoller.addAction(photosAction)
-//                alertContoller.addAction(cameraAction)
-//                alertContoller.addAction(cancelAction)
-//                self.present(alertContoller, animated: true, completion: nil)
-//            }
-//            self.formDetail = data
-//        }
-//
-//        self.viewModel.didGetFormResponse = { data in
-//            if data.status == "error" {
-//                guard let errors = data.errors?.compactMap({ $0?.fragments.fieldError }) else { return }
-//                self.formView.errors = errors
-//            } else {
-//                self.formView.showThankContent()
-//            }
-//        }
-//
-//        self.viewModel.didSetUnreadCount = { data in
-//            self.conversationsView.unreadIds = data
-//            self.conversationsView.tableView.reloadData()
-//
-//        }
-//
-//        self.viewModel.didReceiveAdminMessage = { data in
-//            self.viewModel.getConversations()
-//        }
-//
         self.viewModel.didReceiveKnowledgeBase = { data in
             self.knowledgeBase = data
         }
@@ -381,42 +228,9 @@ class HomeView: AbstractViewController {
         }else{
             controller.supporters = self.supporters
         }
-        
         self.navigationController?.pushViewController(controller, animated: true)
     }
-//
-//    @objc func openForm(sender: UIButton) {
-//        if !sender.isSelected {
-//            sender.isSelected = true
-//            self.formView.setData(form: self.formDetail!)
-//            self.view.layoutSubviews()
-//        } else {
-//            self.viewModel.sendForm(formId: self.formId ?? "", submissions: self.formView.submissions)
-//        }
-//
-//    }
-
-//    func startUplaoder(image: UIImage, filePath: URL? = nil) {
-//
-//
-//        if filePath == nil {
-//            let uploader = UploadView(image: image)
-//            uploader.tag = 55
-//            uploader.delegate = self
-//            self.view.addSubview(uploader)
-//        } else {
-//            let uploader = UploadView(image: UIImage(), filePath: filePath!)
-//            uploader.tag = 55
-//            uploader.delegate = self
-//            self.view.addSubview(uploader)
-//        }
-//    }
-
-
-
 }
-
-
 
 extension HomeView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -432,54 +246,6 @@ extension HomeView: UIScrollViewDelegate {
     }
 }
 
-
-//extension HomeView: FusumaDelegate {
-//    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
-//
-//    }
-//
-//    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
-//        self.startUplaoder(image: image)
-//    }
-//
-//    func fusumaVideoCompleted(withFileURL fileURL: URL) {
-//
-//    }
-//
-//    func fusumaCameraRollUnauthorized() {
-//
-//    }
-//
-//
-//}
-
-
-//extension HomeView: UIDocumentPickerDelegate {
-//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-//        controller.dismiss(animated: true) {
-//
-//
-//            self.startUplaoder(image: UIImage(), filePath: url)
-//        }
-//    }
-//}
-
-
-//extension HomeView: AttachmentUploadDelegate {
-//    func uploadFailed(errorMessage: String) {
-//
-//    }
-//
-//    func attachmentUploaded(file: AttachmentInput) {
-//        if let uploadView = self.view.viewWithTag(55) {
-//            uploadView.removeFromSuperview()
-//        }
-//
-//        self.formView.fileUploadFinished(file: file)
-//    }
-//}
-//
-//
 extension HomeView: SegmentedControlDelegate {
     func changeToIndex(index: Int) {
         if index == 1 {
@@ -508,18 +274,13 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
         } else {
             return searchArray.count
         }
-
-
-
-
-
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         if searchField.text!.isEmpty {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "KnowledBaseTopicCell", for: indexPath) as? KnowledBaseTopicCell {
                 if let model = self.knowledgeBase.categories![indexPath.row]?.fragments.knowledgeBaseCategoryModel {
+                    cell.contentView.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
                     cell.setup(model: model)
                     cell.layoutIfNeeded()
                 }
@@ -527,65 +288,45 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "KBCategoryCell", for: indexPath) as? KBCategoryCell {
-                let model = self.searchArray[indexPath.row] 
+                let model = self.searchArray[indexPath.row]
+                    cell.contentView.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
                     cell.setup(model: model)
                     cell.layoutIfNeeded()
-                
                 return cell
             }
         }
-
-
-
-
-
         return UITableViewCell()
     }
 
-
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-
         if let model = self.knowledgeBase.categories![indexPath.row]?.fragments.knowledgeBaseCategoryModel {
             let controller = KBCategoryView()
             controller.categoryId = model._id!
             controller.mainTitle = model.title
             controller.subTitle = model.description
+            self.view.endEditing(true)
             self.navigationController?.pushViewController(controller, animated: true)
         }
-
     }
 
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 60))
         headerView.backgroundColor = UIColor.init(hexString: "#f6f4f8")
         headerView.addSubview(searchField)
         searchField.center = headerView.center
         return headerView
-
-//        return UIView()
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
         return 60
-
-
     }
-
-
 
     @objc func searchAction(sender: UITextField) {
         self.searchArray.removeAll()
         if sender.text?.count != 0 {
             if let search = sender.text {
                 self.searchArray = self.viewModel.allKBArticles.filter({ ($0.content?.contains(search))! || ($0.title?.contains(search))! || ($0.summary?.contains(search))! })
-
             }
-
         }
         self.knowledgeBaseTableView.reloadData()
     }
@@ -593,7 +334,7 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
     @objc func beginSearchAnimation(sender: UITextField) {
         self.containerView.bringSubview(toFront: knowledgeBaseTableView)
         UIView.animate(withDuration: 0.3) {
-//            self.knowledgeBaseTableView.snp.removeConstraints()
+            self.knowledgeBaseTableView.snp.removeConstraints()
             self.knowledgeBaseTableView.snp.remakeConstraints { (make) in
                 make.left.right.bottom.equalToSuperview()
                 make.top.equalToSuperview()
@@ -604,7 +345,7 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
 
     @objc func endSearchAnimation(sender: UITextField) {
         UIView.animate(withDuration: 0.3) {
-//            self.knowledgeBaseTableView.snp.removeConstraints()
+            self.knowledgeBaseTableView.snp.removeConstraints()
             self.knowledgeBaseTableView.snp.remakeConstraints { (make) in
                 make.left.right.bottom.equalToSuperview()
                 make.top.equalTo(self.segmentContainer.snp.bottom).offset(2)
